@@ -1,23 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import SelectionScreen from './components/SelectionScreen';
+import Game from './components/Game';
+import GameHistory from './components/GameHistory';
+import {createStore} from 'redux';
+import { gameReducer, initialState } from './reducers/gameReducer';
+const store = createStore(gameReducer, initialState);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+   <div className='app'>
+    <Provider store={store}>
+    <Router>
+      <Routes>
+        <Route exact path="/" element={<SelectionScreen/>}/>
+        <Route path="/game" element={<Game/>} />
+        <Route path="/history" element={<GameHistory/>} />
+      </Routes>
+    </Router>
+  </Provider>
     </div>
   );
 }
