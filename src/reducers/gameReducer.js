@@ -20,11 +20,10 @@ export const gameReducer = (state, action) => {
     case 'SET_PLAYER':
         return { ...state, turn: action.player };
      case 'SAVE_HISTORY':
-        return { ...state, gameHistory:[...state.gameHistory,action.gamestatus] };
+      return { ...state, gameHistory:[action.gamestatus] };
     case 'ADD_SYMBOL':
 
       const {symbol, row, position} = action;
-      console.log(symbol,row,position);
       const newState = _.cloneDeep(state);
       newState.board[row][position] = symbol;
 
